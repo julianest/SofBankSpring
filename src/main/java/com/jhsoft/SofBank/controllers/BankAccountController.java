@@ -24,13 +24,9 @@ public class BankAccountController {
 
     @GetMapping("/{numberAccount}")
     public ResponseEntity<BankAccount> getAccountByNumber(@PathVariable String numberAccount ){
-        Optional<BankAccount> bankAccount = bankAccountService.getAccountByNumber(numberAccount);
-        if (bankAccount.isPresent()) {
-            return ResponseEntity.ok(bankAccount.get());
-        } else {
+        BankAccount bankAccount = bankAccountService.getAccountByNumber(numberAccount);
+            return ResponseEntity.ok(bankAccount);
 
-            return ResponseEntity.notFound().build();
-        }
     }
 
 

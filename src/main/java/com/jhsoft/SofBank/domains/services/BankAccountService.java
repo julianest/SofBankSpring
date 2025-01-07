@@ -3,10 +3,8 @@ package com.jhsoft.SofBank.domains.services;
 import com.jhsoft.SofBank.domains.Factory.BankAccountFactory;
 import com.jhsoft.SofBank.domains.dtos.BankAccountDTO;
 import com.jhsoft.SofBank.domains.entities.BankAccount;
-import com.jhsoft.SofBank.domains.entities.CheckingAccount;
-import com.jhsoft.SofBank.domains.entities.SavingsAccount;
-import com.jhsoft.SofBank.domains.entities.TypeAccount;
 import com.jhsoft.SofBank.domains.repositories.BankAccountRepository;
+import com.jhsoft.SofBank.exceptions.AccountNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import jakarta.transaction.Transactional;
@@ -39,13 +37,9 @@ public class BankAccountService {
         return savedAccount;
     }
 
-    public Optional<BankAccount> getAccountByNumber(String numberAccount){
-//        BankAccount bankAccount =  bankAccountRepository.findByNumberAccount(numberAccount) ;
-//        if(bankAccount == null){
-//            throw new RuntimeException("No se encuentra la cuenta con este numero: "+ bankAccount.getNumberAccount());
-//        }
-//        return bankAccount;
-        return bankAccountRepository.findByNumberAccount(numberAccount) ;
+    public BankAccount getAccountByNumber(String numberAccount){
+        return bankAccountRepository.findByNumberAccount(numberAccount).
+                orElseThrow(()-> new AccountNotFoundException("Cuenta no Encontrada: "+ numberAccount)) ;
     }
 
 
