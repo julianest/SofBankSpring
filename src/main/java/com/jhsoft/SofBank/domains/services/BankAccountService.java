@@ -1,15 +1,54 @@
 package com.jhsoft.SofBank.domains.services;
 
+import com.jhsoft.SofBank.domains.Factory.BankAccountFactory;
+import com.jhsoft.SofBank.domains.dtos.BankAccountDTO;
 import com.jhsoft.SofBank.domains.entities.BankAccount;
+import com.jhsoft.SofBank.domains.entities.CheckingAccount;
+import com.jhsoft.SofBank.domains.entities.SavingsAccount;
+import com.jhsoft.SofBank.domains.entities.TypeAccount;
+import com.jhsoft.SofBank.domains.repositories.BankAccountRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class BankAccountService {
 
+    @Autowired
+    private BankAccountFactory bankAccountFactory;
+
+    @Autowired
+    private BankAccountRepository bankAccountRepository;
+
     private static final Logger logger = LoggerFactory.getLogger(BankAccountService.class);
+
+
+    public BankAccount createAccount(BankAccountDTO bankAccountDTO){
+        BankAccount bankAccount = bankAccountFactory.createAccount(
+                    bankAccountDTO.getNumberAccount(), bankAccountDTO.getBalance(),
+                    bankAccountDTO.getRateInterest(), bankAccountDTO.getTypeAccount()
+        );
+        bankAccount.setCreatedBy("Sistema");
+        BankAccount savedAccount = bankAccountRepository.save(bankAccount);
+
+        logger.info("Creando cuenta "+ bankAccountDTO.getTypeAccount() + " N° " + bankAccountDTO.getNumberAccount());
+        return savedAccount;
+    }
+
+    public Optional<BankAccount> getAccountByNumber(String numberAccount){
+//        BankAccount bankAccount =  bankAccountRepository.findByNumberAccount(numberAccount) ;
+//        if(bankAccount == null){
+//            throw new RuntimeException("No se encuentra la cuenta con este numero: "+ bankAccount.getNumberAccount());
+//        }
+//        return bankAccount;
+        return bankAccountRepository.findByNumberAccount(numberAccount) ;
+    }
+
+
 
     @Transactional
     public void deposit(BankAccount bankAccount, double amount){

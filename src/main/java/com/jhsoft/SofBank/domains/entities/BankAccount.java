@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,17 +37,17 @@ public class BankAccount {
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
     @Column(nullable = false, updatable = false, length = 20)
     private String createdBy;
 
-    @CreationTimestamp
+    /*@CreationTimestamp
     @Column(nullable = false)
     private Timestamp modifyAt;
 
-    @Column(nullable = false, length = 20)
-    private String modifyBy;
+    @Column(length = 20)
+    private String modifyBy;*/
 
     @OneToMany(mappedBy = "bankAccount", cascade= CascadeType.ALL, orphanRemoval = true)
     private List<UserBankAccountAssociation> userAssociations = new ArrayList<>();
