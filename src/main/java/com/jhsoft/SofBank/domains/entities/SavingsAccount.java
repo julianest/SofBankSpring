@@ -1,5 +1,7 @@
 package com.jhsoft.SofBank.domains.entities;
 
+import com.jhsoft.SofBank.domains.strategy.Interfaces.ICalculationInterestStrategy;
+import com.jhsoft.SofBank.domains.strategy.SavingsAccountStrategy;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
