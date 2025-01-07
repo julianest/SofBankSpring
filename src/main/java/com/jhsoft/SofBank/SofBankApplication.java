@@ -37,11 +37,11 @@ public class SofBankApplication implements CommandLineRunner {
 	}
 
 	public void runApplication() {
-		SavingsAccount savingAccount = (SavingsAccount) bankAccountFactory.createAccount("11111111", 800.0, 0.087, TypeAccount.AHORRO);
+		/*SavingsAccount savingAccount = (SavingsAccount) bankAccountFactory.createAccount("11111111", 800.0, 0.087, TypeAccount.AHORRO);
 		CheckingAccount checkingAccount = (CheckingAccount) bankAccountFactory.createAccount("22222222", 600.0, 0.066, TypeAccount.CORRIENTE);
-
+*/
 		logger.info("Aplicacion SofBank Iniciada.");
-
+/*
 		savingsAccountService.deposit(savingAccount,200);
 		savingsAccountService.withdraw(savingAccount,500);
 		savingsAccountService.showAccountStatement(savingAccount);
@@ -49,7 +49,7 @@ public class SofBankApplication implements CommandLineRunner {
 		ChekingAccountService.deposit(checkingAccount,800);
 		ChekingAccountService.withdraw(checkingAccount,500);
 		ChekingAccountService.showAccountStatement(checkingAccount);
-
+*/
 	}
 
 }
