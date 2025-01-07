@@ -1,9 +1,11 @@
 package com.jhsoft.SofBank;
 
-import com.jhsoft.SofBank.domains.Factory.BankAccountFactory;
-import com.jhsoft.SofBank.domains.entities.BankAccount;
+import com.jhsoft.SofBank.domains.entities.CheckingAccount;
+import com.jhsoft.SofBank.domains.entities.SavingsAccount;
 import com.jhsoft.SofBank.domains.entities.TypeAccount;
-import com.jhsoft.SofBank.domains.services.BankAccountService;
+import com.jhsoft.SofBank.domains.Factory.BankAccountFactory;
+import com.jhsoft.SofBank.domains.services.CheckingAccountService;
+import com.jhsoft.SofBank.domains.services.SavingsAccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,10 @@ public class SofBankApplication implements CommandLineRunner {
 	private BankAccountFactory bankAccountFactory;
 
 	@Autowired
-	private BankAccountService bankAccountService;
+	private SavingsAccountService savingsAccountService;
+
+	@Autowired
+	private CheckingAccountService ChekingAccountService;
 
 	private static final Logger logger = LoggerFactory.getLogger(SofBankApplication.class);
 
@@ -32,13 +37,18 @@ public class SofBankApplication implements CommandLineRunner {
 	}
 
 	public void runApplication() {
-		BankAccount savingAccount = bankAccountFactory.createAccount("11111111", 800.0, 0.087, TypeAccount.AHORRO);
+		SavingsAccount savingAccount = (SavingsAccount) bankAccountFactory.createAccount("11111111", 800.0, 0.087, TypeAccount.AHORRO);
+		CheckingAccount checkingAccount = (CheckingAccount) bankAccountFactory.createAccount("22222222", 600.0, 0.066, TypeAccount.CORRIENTE);
 
 		logger.info("Aplicacion SofBank Iniciada.");
 
-		bankAccountService.deposit(savingAccount,200);
-		bankAccountService.withdraw(savingAccount,500);
-		bankAccountService.showAccountStatement(savingAccount);
+		savingsAccountService.deposit(savingAccount,200);
+		savingsAccountService.withdraw(savingAccount,500);
+		savingsAccountService.showAccountStatement(savingAccount);
+
+		ChekingAccountService.deposit(checkingAccount,800);
+		ChekingAccountService.withdraw(checkingAccount,500);
+		ChekingAccountService.showAccountStatement(checkingAccount);
 
 	}
 
