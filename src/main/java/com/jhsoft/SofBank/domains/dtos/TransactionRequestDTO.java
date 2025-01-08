@@ -1,16 +1,17 @@
 package com.jhsoft.SofBank.domains.dtos;
 
 import com.jhsoft.SofBank.domains.entities.TypeAccount;
+import com.jhsoft.SofBank.domains.services.TypeTransaction;
 import lombok.*;
+
 
 @Getter
 @Setter
-public class BankAccountDTO {
+public class TransactionRequestDTO {
 
-    private String numberAccount;
-    private double balance;
-    private double rateInterest;
-    private double interestAccumulated;
+    private double amount;
+    private TypeTransaction typeTransaction;
     private TypeAccount typeAccount;
+
 
 }
