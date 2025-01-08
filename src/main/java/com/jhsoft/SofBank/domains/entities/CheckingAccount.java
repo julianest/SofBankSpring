@@ -17,7 +17,7 @@ public class CheckingAccount extends BankAccount{
 //    private BankAccount bankAccount;
 
     public CheckingAccount(String numberAccount, double balance, double rateInterest){
-        super(numberAccount, balance,TypeAccount.AHORRO);
+        super(numberAccount, balance,TypeAccount.CORRIENTE);
         this.rateInterest = rateInterest;
     }
 

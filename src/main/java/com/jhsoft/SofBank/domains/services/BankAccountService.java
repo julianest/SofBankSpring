@@ -2,19 +2,22 @@ package com.jhsoft.SofBank.domains.services;
 
 import com.jhsoft.SofBank.domains.Factory.BankAccountFactory;
 import com.jhsoft.SofBank.domains.dtos.BankAccountDTO;
+import com.jhsoft.SofBank.domains.dtos.TransactionRequestDTO;
 import com.jhsoft.SofBank.domains.entities.BankAccount;
 import com.jhsoft.SofBank.domains.repositories.BankAccountRepository;
 import com.jhsoft.SofBank.exceptions.AccountNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class BankAccountService {
+public abstract class BankAccountService {
 
     @Autowired
     private BankAccountFactory bankAccountFactory;
@@ -32,38 +35,46 @@ public class BankAccountService {
         );
         bankAccount.setCreatedBy("Sistema");
         BankAccount savedAccount = bankAccountRepository.save(bankAccount);
-
         logger.info("Creando cuenta "+ bankAccountDTO.getTypeAccount() + " N° " + bankAccountDTO.getNumberAccount());
         return savedAccount;
     }
 
     public BankAccount getAccountByNumber(String numberAccount){
         return bankAccountRepository.findByNumberAccount(numberAccount).
-                orElseThrow(()-> new AccountNotFoundException("Cuenta no Encontrada: "+ numberAccount)) ;
+                orElseThrow(()-> new AccountNotFoundException("Cuenta no Encontrada con Numero: "+ numberAccount)) ;
     }
 
+    public void deleteAccount(String numberAccount){
+        BankAccount bankAccount = bankAccountRepository.findByNumberAccount(numberAccount).
+                orElseThrow(()-> new AccountNotFoundException("Cuenta no Encontrada para eliminar con Numero: "+ numberAccount));
+        bankAccountRepository.delete(bankAccount);
+        logger.info("Eliminacion cuenta "+ bankAccount.getTypeAccount() + " N° " + bankAccount.getNumberAccount());
 
+    }
 
-    @Transactional
-    public void deposit(BankAccount bankAccount, double amount){
+    public abstract BankAccount updateBalance(String numberAccount, TransactionRequestDTO requestDTO);
+
+    public BankAccount deposit(BankAccount bankAccount, double amount){
         if(amount > 0){
             bankAccount.setBalance(bankAccount.getBalance() + amount);
+            //bankAccountRepository.save(bankAccount);
             logger.info("Se ha depositado "+ amount + " En la cuenta: "+ bankAccount.getNumberAccount() );
         }else {
             logger.warn("Intento de depósito con un monto no válido: " + amount);
         }
+        return bankAccount;
     }
 
-    @Transactional
-    public double withdraw(BankAccount bankAccount, double amount){
+
+    public BankAccount withdraw(BankAccount bankAccount, double amount){
         if(amount <= bankAccount.getBalance()){
             bankAccount.setBalance(bankAccount.getBalance() - amount);
+            //bankAccountRepository.save(bankAccount);
             logger.info("- Retiro   de $" + amount + " en la cuenta "+ bankAccount.getNumberAccount());
-            return amount;
         }else{
-            logger.info("- Imposible retirar. el monto supera el saldo en cuenta: $" + bankAccount.getBalance());
-            return 0.0;
+            logger.warn("- Imposible retirar. el monto supera el saldo en cuenta: $" + bankAccount.getBalance());
         }
+        return bankAccount;
     }
 
     public double getInterestFreeBalance(BankAccount bankAccount){ return bankAccount.getBalance() - bankAccount.getInterestAccumulated();}
@@ -82,5 +93,6 @@ public class BankAccountService {
                         bankAccount.getInterestAccumulated(), bankAccount.getBalance());
         System.out.println(message);
     }
+
 
 }

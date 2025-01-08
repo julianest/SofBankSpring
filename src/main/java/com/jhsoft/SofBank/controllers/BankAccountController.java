@@ -1,13 +1,16 @@
 package com.jhsoft.SofBank.controllers;
 
 import com.jhsoft.SofBank.domains.dtos.BankAccountDTO;
+import com.jhsoft.SofBank.domains.dtos.TransactionRequestDTO;
 import com.jhsoft.SofBank.domains.entities.BankAccount;
 import com.jhsoft.SofBank.domains.services.BankAccountService;
+import com.jhsoft.SofBank.domains.services.factory.BankAccountServiceFactory;
+import com.jhsoft.SofBank.exceptions.AccountNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/accounts")
@@ -15,6 +18,11 @@ public class BankAccountController {
 
     @Autowired
     private BankAccountService bankAccountService;
+
+    @Autowired
+    private BankAccountServiceFactory bankAccountServiceFactory;
+
+    private static final Logger logger = LoggerFactory.getLogger(BankAccountService.class);
 
     @PostMapping
     public ResponseEntity<BankAccount> createAccount(@RequestBody BankAccountDTO bankAccountDTO){
@@ -29,20 +37,23 @@ public class BankAccountController {
 
     }
 
+    @DeleteMapping("/delete/{numberAccount}")
+    public ResponseEntity<Void> deleteAccount(@PathVariable String numberAccount){
+        try{
+            bankAccountService.deleteAccount(numberAccount);
+            return ResponseEntity.noContent().build();
+        } catch (AccountNotFoundException e) {
+            return ResponseEntity.noContent().build();
+        }
 
-//    @PutMapping("/{numberAccount}/deposit ")
-//    public ResponseEntity<BankAccount> deposit(@PathVariable String numberAccount, @RequestParam double amount ){
-////        BankAccount bankAccount = bankAccountService.getAccountByNumber(numberAccount);
-////        if(bankAccount == null ){
-////            return ResponseEntity.notFound().build();
-////        }
-//        Optional<BankAccount> bankAccount = bankAccountService.getAccountByNumber(numberAccount);
-//        if (bankAccount.isPresent()) {
-//            return ResponseEntity.ok(bankAccount.get());
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//        bankAccountService.deposit(bankAccount, amount);
-//        return ResponseEntity.ok(bankAccount);
-//    }
+    }
+
+    @PutMapping("/update/{numberAccount}")
+    public ResponseEntity<BankAccount> updateAccount(@PathVariable String numberAccount,
+                                                     @RequestBody TransactionRequestDTO requestDTO ){
+
+        BankAccountService bankAccountService = bankAccountServiceFactory.getService(requestDTO.getTypeAccount());
+        BankAccount bankAccount = bankAccountService.updateBalance(numberAccount, requestDTO);
+        return ResponseEntity.ok(bankAccount);
+    }
 }
