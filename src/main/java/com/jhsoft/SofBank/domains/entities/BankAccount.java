@@ -17,6 +17,12 @@ import java.util.List;
 @NoArgsConstructor
 public class BankAccount {
 
+    public BankAccount(String numberAccount, double initialbalance, TypeAccount typeAccount ){
+        this.numberAccount = numberAccount;
+        this.balance = initialbalance;
+        this.typeAccount = typeAccount;
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idBankAccount;
@@ -52,10 +58,5 @@ public class BankAccount {
     @OneToMany(mappedBy = "bankAccount", cascade= CascadeType.ALL, orphanRemoval = true)
     private List<UserBankAccountAssociation> userAssociations = new ArrayList<>();
 
-    public BankAccount(String numberAccount, double initialbalance, TypeAccount typeAccount ){
-        this.numberAccount = numberAccount;
-        this.balance = initialbalance;
-        this.typeAccount = typeAccount;
-    }
 
 }
