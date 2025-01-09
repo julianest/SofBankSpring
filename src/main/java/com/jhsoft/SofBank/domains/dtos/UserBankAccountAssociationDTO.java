@@ -14,5 +14,7 @@ public class UserBankAccountAssociationDTO {
 //    private TypeRol role;
     private String bankAccount;
     private String users;
+    private String identification;
+    private String numberAccount;
     private TypeRol role;
 }

@@ -1,8 +1,5 @@
 package com.jhsoft.SofBank;
 
-import com.jhsoft.SofBank.domains.entities.CheckingAccount;
-import com.jhsoft.SofBank.domains.entities.SavingsAccount;
-import com.jhsoft.SofBank.domains.entities.TypeAccount;
 import com.jhsoft.SofBank.domains.Factory.BankAccountFactory;
 import com.jhsoft.SofBank.domains.services.CheckingAccountService;
 import com.jhsoft.SofBank.domains.services.SavingsAccountService;
@@ -37,19 +34,7 @@ public class SofBankApplication implements CommandLineRunner {
 	}
 
 	public void runApplication() {
-		/*SavingsAccount savingAccount = (SavingsAccount) bankAccountFactory.createAccount("11111111", 800.0, 0.087, TypeAccount.AHORRO);
-		CheckingAccount checkingAccount = (CheckingAccount) bankAccountFactory.createAccount("22222222", 600.0, 0.066, TypeAccount.CORRIENTE);
-*/
 		logger.info("Aplicacion SofBank Iniciada.");
-/*
-		savingsAccountService.deposit(savingAccount,200);
-		savingsAccountService.withdraw(savingAccount,500);
-		savingsAccountService.showAccountStatement(savingAccount);
 
-		ChekingAccountService.deposit(checkingAccount,800);
-		ChekingAccountService.withdraw(checkingAccount,500);
-		ChekingAccountService.showAccountStatement(checkingAccount);
-*/
 	}
-
 }

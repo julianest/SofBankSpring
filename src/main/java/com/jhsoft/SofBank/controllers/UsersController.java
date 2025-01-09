@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UsersController {
@@ -16,9 +19,13 @@ public class UsersController {
     private UsersServices usersServices;
 
     @PostMapping
-    public ResponseEntity<Users> createUser(@RequestBody UsersDTO usersDTO){
-        Users createdUser = usersServices.createUser(usersDTO);
-        return ResponseEntity.ok(createdUser);
+    public ResponseEntity<List<Users>> createUsers(@RequestBody List<UsersDTO> usersDTOs){
+        List<Users> createdUsers = new ArrayList<>();
+        for (UsersDTO usersDTO : usersDTOs) {
+            Users createdUser = usersServices.createUser(usersDTO);
+            createdUsers.add(createdUser);
+        }
+        return ResponseEntity.ok(createdUsers);
     }
 
     @GetMapping("/{identification}")

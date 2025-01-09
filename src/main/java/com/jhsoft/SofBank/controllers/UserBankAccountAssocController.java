@@ -1,19 +1,19 @@
 package com.jhsoft.SofBank.controllers;
 
 import com.jhsoft.SofBank.domains.dtos.UserBankAccountAssociationDTO;
-import com.jhsoft.SofBank.domains.dtos.UsersDTO;
+import com.jhsoft.SofBank.domains.dtos.UserBankAccountDTO;
 import com.jhsoft.SofBank.domains.entities.BankAccount;
 import com.jhsoft.SofBank.domains.entities.UserBankAccountAssociation;
 import com.jhsoft.SofBank.domains.entities.Users;
 import com.jhsoft.SofBank.domains.services.BankAccountService;
 import com.jhsoft.SofBank.domains.services.UserBankAccountAssocServices;
 import com.jhsoft.SofBank.domains.services.UsersServices;
-import com.jhsoft.SofBank.domains.services.factory.BankAccountServiceFactory;
 import com.jhsoft.SofBank.exceptions.AccountNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,8 +29,36 @@ public class UserBankAccountAssocController {
     @Autowired
     private BankAccountService bankAccountService;
 
+    @PostMapping("/batch")
+    public ResponseEntity<List<UserBankAccountAssociation>> createAssociations(
+            @RequestBody List<UserBankAccountAssociationDTO> associationsDTO){
+
+        List<UserBankAccountAssociation> createdAssociations = new ArrayList<>();
+
+        for (UserBankAccountAssociationDTO associationDTO : associationsDTO) {
+
+            Users userAccount = usersServices.getUserByIdentification(associationDTO.getIdentification());
+
+            // Busca la cuenta bancaria por su número de cuenta
+            BankAccount bankAccount = bankAccountService.getAccountByNumber(associationDTO.getNumberAccount());
+
+            // Asegúrate de que el usuario y la cuenta bancaria fueron encontrados
+            if (userAccount == null) {
+                throw new IllegalArgumentException("Usuario con identificación " + associationDTO.getIdentification() + " no encontrado");
+            }
+            if (bankAccount == null) {
+                throw new IllegalArgumentException("Cuenta bancaria con número " + associationDTO.getNumberAccount() + " no encontrada");
+            }
+
+            UserBankAccountAssociation createdAssociation = userBankAccountAssocServices.createAssociation(userAccount, bankAccount, associationDTO);
+            createdAssociations.add(createdAssociation);
+        }
+        return ResponseEntity.ok(createdAssociations);
+    }
+
+
     @PostMapping("/{identification}/{numberAccount}")
-    public ResponseEntity<UserBankAccountAssociation> createAssociation(
+    public ResponseEntity<UserBankAccountAssociation> createAssociations(
             @PathVariable String identification,
             @PathVariable String numberAccount,
             @RequestBody UserBankAccountAssociationDTO userBankAccountAssociationDTO){
