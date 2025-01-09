@@ -13,4 +13,6 @@ public class BankAccountDTO {
     private double interestAccumulated;
     private TypeAccount typeAccount;
 
+    public BankAccountDTO(String number, double v, double v1, TypeAccount typeAccount) {
+    }
 }
