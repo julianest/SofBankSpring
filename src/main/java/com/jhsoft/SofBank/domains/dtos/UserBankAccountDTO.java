@@ -1,9 +1,7 @@
-package com.jhsoft.SofBank.controllers;
+package com.jhsoft.SofBank.domains.dtos;
 
 import com.jhsoft.SofBank.domains.entities.TypeAccount;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter

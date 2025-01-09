@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/accounts")
 public class BankAccountController {
@@ -25,9 +28,13 @@ public class BankAccountController {
     private static final Logger logger = LoggerFactory.getLogger(BankAccountService.class);
 
     @PostMapping
-    public ResponseEntity<BankAccount> createAccount(@RequestBody BankAccountDTO bankAccountDTO){
-        BankAccount createdAccount = bankAccountService.createAccount(bankAccountDTO);
-        return ResponseEntity.ok(createdAccount);
+    public ResponseEntity<List<BankAccount>> createAccounts(@RequestBody List<BankAccountDTO> bankAccountDTOs){
+        List<BankAccount> createdAccounts = new ArrayList<>();
+        for (BankAccountDTO bankAccountDTO : bankAccountDTOs) {
+            BankAccount createdAccount = bankAccountService.createAccount(bankAccountDTO);
+            createdAccounts.add(createdAccount);
+        }
+        return ResponseEntity.ok(createdAccounts);
     }
 
     @GetMapping("/{numberAccount}")

@@ -1,6 +1,6 @@
 package com.jhsoft.SofBank.domains.services;
 
-import com.jhsoft.SofBank.controllers.UserBankAccountDTO;
+import com.jhsoft.SofBank.domains.dtos.UserBankAccountDTO;
 import com.jhsoft.SofBank.domains.dtos.UserBankAccountAssociationDTO;
 import com.jhsoft.SofBank.domains.entities.BankAccount;
 import com.jhsoft.SofBank.domains.entities.UserBankAccountAssociation;
@@ -55,11 +55,12 @@ public class UserBankAccountAssocServices {
 
         Optional<UserBankAccountAssociation> existingAssociation = userBankAccountAssocRepository.findByUsersAndBankAccount(users, account);
 
+        /* validacioin de si la asociacion ya existe se comenta para poder generar union entre otras cuentas.
         if (existingAssociation.isPresent()) {
             // Si la asociación ya existe, lanzamos una excepción o retornamos un mensaje indicando que ya existe
             throw new AssociationNotFoundException("La asociación entre el usuario con identificación: "
                     + users.getIdentification() + " y la cuenta: " + account.getNumberAccount() + " ya existe.");
-        }
+        }*/
         UserBankAccountAssociation createdAssociation = new UserBankAccountAssociation(
                 account ,users, userBankAccountAssociationDTO.getRole());
 
