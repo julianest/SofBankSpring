@@ -17,7 +17,7 @@ public class UsersServices {
     @Autowired
     private UsersRepository usersRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(BankAccountService.class);
+    private static final Logger logger = LoggerFactory.getLogger(UsersServices.class);
 
 
     public Users createUser(UsersDTO usersDTO){

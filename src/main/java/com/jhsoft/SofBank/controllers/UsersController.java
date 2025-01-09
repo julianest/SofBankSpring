@@ -1,10 +1,9 @@
 package com.jhsoft.SofBank.controllers;
 
-import com.jhsoft.SofBank.domains.dtos.TransactionRequestDTO;
 import com.jhsoft.SofBank.domains.dtos.UsersDTO;
 import com.jhsoft.SofBank.domains.entities.Users;
 import com.jhsoft.SofBank.domains.services.UsersServices;
-import com.jhsoft.SofBank.exceptions.AccountNotFoundException;
+import com.jhsoft.SofBank.exceptions.UsersNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +32,7 @@ public class UsersController {
         try{
             usersServices.deleteUser(identification);
             return ResponseEntity.noContent().build();
-        } catch (AccountNotFoundException e) {
+        } catch (UsersNotFoundException e) {
             return ResponseEntity.noContent().build();
         }
     }
