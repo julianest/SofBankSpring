@@ -114,7 +114,6 @@ public class UserBankAccountAssocServices {
             throw new AssociationNotFoundException("No hay cuentas asociadas para el usuario con identificación: " + identification);
         }
 
-        // Mapea las asociaciones al DTO
         return associations.stream()
                 .map(association -> new UserBankAccountDTO(
                         user.getIdentification(),
