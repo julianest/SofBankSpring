@@ -16,6 +16,9 @@ SofBank es una aplicación de gestión bancaria diseñada para manejar usuarios,
 
 El proyecto sigue una estructura bien definida para mantener una separación clara de responsabilidades:
 
+## Diagrama de Clases
+![img.png](src/main/resources/MER.png)
+
 ### Entidades Principales
 
 1. **Users**: Maneja la información de los usuarios.
@@ -176,6 +179,10 @@ Extensibilidad: La estructura permite agregar nuevos tipos de cuentas y estrateg
 5. Accede a la aplicación en tu navegador en `http://localhost:8080`.
 
 ---
+
+## POSTMAN
+Colecciones:
+[SofkaBank.postman_collection.json](src/main/resources/SofkaBank.postman_collection.json)
 
 ## SWAGGER
 - Revisar Documentacion de los controllers en el siguiente enlace:
