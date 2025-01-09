@@ -15,5 +15,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleUsersNotFoundException(UsersNotFoundException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
+    @ExceptionHandler(AssociationNotFoundException.class)
+    public ResponseEntity<String> handleAssociationNotFoundException(AssociationNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
 
 }
