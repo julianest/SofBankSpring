@@ -17,7 +17,7 @@ SofBank es una aplicación de gestión bancaria diseñada para manejar usuarios,
 El proyecto sigue una estructura bien definida para mantener una separación clara de responsabilidades:
 
 ## Diagrama de Clases
-![img.png](src/main/resources/MER.png)
+![DiagramaClases.png](src/main/resources/DiagramaClases.png)
 
 ### Entidades Principales
 
