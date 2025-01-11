@@ -1,4 +1,4 @@
-package com.jhsoft.SofBank.domains.services;
+package com.jhsoft.SofBank.utils.enums;
 
 public enum TypeRol {
     ADMIN,

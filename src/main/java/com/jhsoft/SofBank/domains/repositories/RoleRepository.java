@@ -1,7 +1,7 @@
 /*package com.jhsoft.SofBank.domains.repositories;
 
 import com.jhsoft.SofBank.domains.entities.Role;
-import com.jhsoft.SofBank.domains.services.TypeRol;
+import com.jhsoft.SofBank.utils.enums.TypeRol;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

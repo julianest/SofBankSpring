@@ -1,5 +1,6 @@
 package com.jhsoft.SofBank.domains.entities;
 
+import com.jhsoft.SofBank.utils.enums.TypeAccount;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,20 +1,17 @@
 package com.jhsoft.SofBank.domains.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.jhsoft.SofBank.domains.Factory.BankAccountFactory;
 import com.jhsoft.SofBank.domains.dtos.BankAccountDTO;
 import com.jhsoft.SofBank.domains.dtos.TransactionRequestDTO;
 import com.jhsoft.SofBank.domains.entities.BankAccount;
 import com.jhsoft.SofBank.domains.repositories.BankAccountRepository;
 import com.jhsoft.SofBank.exceptions.AccountNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.jhsoft.SofBank.utils.Converters;
+import com.jhsoft.SofBank.utils.enums.TypeObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public abstract class BankAccountService {
@@ -25,15 +22,20 @@ public abstract class BankAccountService {
     @Autowired
     private BankAccountRepository bankAccountRepository;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    @Autowired
+    private Converters converters;
+
     private static final Logger logger = LoggerFactory.getLogger(BankAccountService.class);
 
 
     public BankAccount createAccount(BankAccountDTO bankAccountDTO){
-        BankAccount bankAccount = bankAccountFactory.createAccount(
-                    bankAccountDTO.getNumberAccount(), bankAccountDTO.getBalance(),
-                    bankAccountDTO.getRateInterest(), bankAccountDTO.getTypeAccount()
-        );
-        bankAccount.setCreatedBy("Sistema");
+
+        BankAccount bankAccount = (BankAccount) authenticationService.addCreatedByAuditInfo().apply(
+                (BankAccount) converters.dtoToObject(bankAccountDTO, TypeObject.BANKACCOUNT));
+
         BankAccount savedAccount = bankAccountRepository.save(bankAccount);
         logger.info("Creando cuenta "+ bankAccountDTO.getTypeAccount() + " N° " + bankAccountDTO.getNumberAccount());
         return savedAccount;

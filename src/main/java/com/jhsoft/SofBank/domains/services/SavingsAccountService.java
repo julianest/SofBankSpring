@@ -7,6 +7,7 @@ import com.jhsoft.SofBank.domains.repositories.BankAccountRepository;
 import com.jhsoft.SofBank.domains.services.factory.IBankAccountService;
 import com.jhsoft.SofBank.domains.strategy.Interfaces.ICalculationInterestStrategy;
 import com.jhsoft.SofBank.exceptions.AccountNotFoundException;
+import com.jhsoft.SofBank.utils.enums.TypeTransaction;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

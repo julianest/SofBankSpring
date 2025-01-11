@@ -8,6 +8,7 @@ import com.jhsoft.SofBank.domains.repositories.BankAccountRepository;
 import com.jhsoft.SofBank.domains.services.factory.IBankAccountService;
 import com.jhsoft.SofBank.domains.strategy.Interfaces.ICalculationInterestStrategy;
 import com.jhsoft.SofBank.exceptions.AccountNotFoundException;
+import com.jhsoft.SofBank.utils.enums.TypeTransaction;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

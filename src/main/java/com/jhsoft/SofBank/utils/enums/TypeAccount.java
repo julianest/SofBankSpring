@@ -1,4 +1,4 @@
-package com.jhsoft.SofBank.domains.entities;
+package com.jhsoft.SofBank.utils.enums;
 
 public enum TypeAccount {
     AHORRO,

@@ -1,5 +1,6 @@
 package com.jhsoft.SofBank.domains.entities;
 
+import com.jhsoft.SofBank.utils.enums.TypeAccount;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,7 +18,7 @@ public class CheckingAccount extends BankAccount{
 //    private BankAccount bankAccount;
 
     public CheckingAccount(String numberAccount, double balance, double rateInterest){
-        super(numberAccount, balance,TypeAccount.CORRIENTE);
+        super(numberAccount, balance, TypeAccount.CORRIENTE);
         this.rateInterest = rateInterest;
     }
 

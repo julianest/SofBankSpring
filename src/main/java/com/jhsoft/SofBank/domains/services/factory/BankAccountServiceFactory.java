@@ -1,6 +1,6 @@
 package com.jhsoft.SofBank.domains.services.factory;
 
-import com.jhsoft.SofBank.domains.entities.TypeAccount;
+import com.jhsoft.SofBank.utils.enums.TypeAccount;
 import com.jhsoft.SofBank.domains.services.BankAccountService;
 import com.jhsoft.SofBank.domains.services.CheckingAccountService;
 import com.jhsoft.SofBank.domains.services.SavingsAccountService;

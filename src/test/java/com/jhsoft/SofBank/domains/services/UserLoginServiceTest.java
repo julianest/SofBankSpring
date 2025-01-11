@@ -2,6 +2,7 @@ package com.jhsoft.SofBank.domains.services;
 
 import com.jhsoft.SofBank.domains.entities.UserLogin;
 import com.jhsoft.SofBank.domains.repositories.UserLoginRepository;
+import com.jhsoft.SofBank.utils.enums.TypeRol;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

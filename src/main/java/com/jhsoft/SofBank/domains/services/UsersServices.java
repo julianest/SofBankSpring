@@ -1,15 +1,20 @@
 package com.jhsoft.SofBank.domains.services;
 
-import com.jhsoft.SofBank.domains.dtos.TransactionRequestDTO;
+import com.jhsoft.SofBank.utils.Converters;
+import com.jhsoft.SofBank.utils.enums.TypeObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import jakarta.transaction.Transactional;
+
 import com.jhsoft.SofBank.domains.dtos.UsersDTO;
 import com.jhsoft.SofBank.domains.entities.Users;
 import com.jhsoft.SofBank.domains.repositories.UsersRepository;
 import com.jhsoft.SofBank.exceptions.UsersNotFoundException;
-import jakarta.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
+import java.util.function.Function;
 
 @Service
 public class UsersServices {
@@ -17,15 +22,24 @@ public class UsersServices {
     @Autowired
     private UsersRepository usersRepository;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    @Autowired
+    private Converters converters;
+
     private static final Logger logger = LoggerFactory.getLogger(UsersServices.class);
 
-
     public Users createUser(UsersDTO usersDTO){
-        Users createdUser = new Users(usersDTO.getIdentification(),usersDTO.getName(), usersDTO.getLastName(), usersDTO.getEmail());
-        createdUser.setCreatedBy("UserSystem");
-        logger.info("Creando el usuario con id: "+ usersDTO.getIdentification());
-        Users savedUser =  usersRepository.save(createdUser);
-        return savedUser;
+        String authUser = authenticationService.getCurrentUser();
+
+        Users createdUser = (Users) authenticationService.addCreatedByAuditInfo().apply(
+                    (Users) converters.dtoToObject(usersDTO, TypeObject.USERS));
+
+        logger.info("Creando el usuario con id: "+ usersDTO.getIdentification() + " Created By: "+ authUser);
+
+        return  usersRepository.save(createdUser);
+
     }
 
     public Users getUserByIdentification(String identification){
@@ -56,5 +70,7 @@ public class UsersServices {
         usersRepository.save(userModify);
         return userModify;
     }
+
+    Function<UsersDTO, Users> dtoToUser = dto -> new Users(dto.getIdentification(), dto.getName(), dto.getLastName(), dto.getEmail());
 
 }
