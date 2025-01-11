@@ -1,8 +1,6 @@
 package com.jhsoft.SofBank.domains.dtos;
 
-import com.jhsoft.SofBank.domains.entities.BankAccount;
-import com.jhsoft.SofBank.domains.entities.Users;
-import com.jhsoft.SofBank.domains.services.TypeRol;
+import com.jhsoft.SofBank.utils.enums.TypeRol;
 import lombok.*;
 
 @Getter

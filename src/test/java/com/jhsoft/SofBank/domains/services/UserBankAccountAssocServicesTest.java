@@ -5,6 +5,8 @@ import com.jhsoft.SofBank.domains.dtos.UserBankAccountDTO;
 import com.jhsoft.SofBank.domains.repositories.UserBankAccountAssocRepository;
 import com.jhsoft.SofBank.domains.repositories.UsersRepository;
 import com.jhsoft.SofBank.exceptions.AssociationNotFoundException;
+import com.jhsoft.SofBank.utils.enums.TypeAccount;
+import com.jhsoft.SofBank.utils.enums.TypeRol;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,12 +15,9 @@ import com.jhsoft.SofBank.domains.entities.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @SpringBootTest
 public class UserBankAccountAssocServicesTest {

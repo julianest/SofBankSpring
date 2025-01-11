@@ -1,6 +1,6 @@
 package com.jhsoft.SofBank.domains.entities;
 
-import com.jhsoft.SofBank.domains.services.TypeRol;
+import com.jhsoft.SofBank.utils.enums.TypeRol;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

@@ -1,6 +1,6 @@
 package com.jhsoft.SofBank.domains.dtos;
 
-import com.jhsoft.SofBank.domains.entities.TypeAccount;
+import com.jhsoft.SofBank.utils.enums.TypeAccount;
 import lombok.*;
 
 @Getter
@@ -13,6 +13,11 @@ public class BankAccountDTO {
     private double interestAccumulated;
     private TypeAccount typeAccount;
 
-    public BankAccountDTO(String number, double v, double v1, TypeAccount typeAccount) {
+    public BankAccountDTO(String numberAccount, double balance, double rateInterest, double interestAccumulated, TypeAccount typeAccount) {
+        this.numberAccount = numberAccount;
+        this.balance = balance;
+        this.rateInterest = rateInterest;
+        this.interestAccumulated = interestAccumulated;
+        this.typeAccount = typeAccount;
     }
 }

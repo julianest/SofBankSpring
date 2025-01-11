@@ -1,5 +1,8 @@
 package com.jhsoft.SofBank.domains.services;
 
+import com.jhsoft.SofBank.utils.enums.TypeRol;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.jhsoft.SofBank.domains.dtos.UserBankAccountDTO;
 import com.jhsoft.SofBank.domains.dtos.UserBankAccountAssociationDTO;
 import com.jhsoft.SofBank.domains.entities.BankAccount;
@@ -11,8 +14,6 @@ import com.jhsoft.SofBank.exceptions.AccountNotFoundException;
 import com.jhsoft.SofBank.exceptions.AssociationNotFoundException;
 import com.jhsoft.SofBank.exceptions.UsersNotFoundException;
 import jakarta.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

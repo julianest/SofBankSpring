@@ -3,21 +3,16 @@ package com.jhsoft.SofBank.domains.services;
 import com.jhsoft.SofBank.domains.Factory.BankAccountFactory;
 import com.jhsoft.SofBank.domains.dtos.BankAccountDTO;
 import com.jhsoft.SofBank.domains.entities.BankAccount;
-import com.jhsoft.SofBank.domains.entities.TypeAccount;
+import com.jhsoft.SofBank.utils.enums.TypeAccount;
 import com.jhsoft.SofBank.domains.repositories.BankAccountRepository;
 import com.jhsoft.SofBank.exceptions.AccountNotFoundException;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.jhsoft.SofBank.domains.dtos.UsersDTO;
-import com.jhsoft.SofBank.domains.entities.Users;
-import com.jhsoft.SofBank.domains.repositories.UsersRepository;
-import com.jhsoft.SofBank.exceptions.UsersNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
@@ -44,7 +39,7 @@ public class BankAccountServiceTest {
     @Test
     public void testCreateAccount_Success() {
 
-        BankAccountDTO accountDTO = new BankAccountDTO("1234", 500.0, 0.05, TypeAccount.AHORRO);
+        BankAccountDTO accountDTO = new BankAccountDTO("1234", 500.0, 0.05, 0.0,TypeAccount.AHORRO);
 
         BankAccount expectedAccount = new BankAccount("1234", 500.0, TypeAccount.AHORRO);
 

@@ -3,7 +3,7 @@ package com.jhsoft.SofBank.domains.Factory;
 import com.jhsoft.SofBank.domains.entities.BankAccount;
 import com.jhsoft.SofBank.domains.entities.CheckingAccount;
 import com.jhsoft.SofBank.domains.entities.SavingsAccount;
-import com.jhsoft.SofBank.domains.entities.TypeAccount;
+import com.jhsoft.SofBank.utils.enums.TypeAccount;
 import org.springframework.stereotype.Component;
 
 @Component

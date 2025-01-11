@@ -1,6 +1,6 @@
 package com.jhsoft.SofBank.domains.dtos;
 
-import com.jhsoft.SofBank.domains.entities.TypeAccount;
+import com.jhsoft.SofBank.utils.enums.TypeAccount;
 import lombok.*;
 
 @Getter
@@ -14,7 +14,6 @@ public class UserBankAccountDTO {
     private double balance;
     private TypeAccount typeAccount;
 
-    // Constructor
     public UserBankAccountDTO(String identification, String name, String lastName, String email,
                                   String accountNumber, double balance, TypeAccount typeAccount) {
         this.identification = identification;
