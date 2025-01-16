@@ -13,5 +13,4 @@ public class TransactionRequestDTO {
     private TypeTransaction typeTransaction;
     private TypeAccount typeAccount;
 
-
 }
