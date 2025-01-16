@@ -7,6 +7,8 @@ import com.jhsoft.SofBank.exceptions.UsersNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +21,12 @@ public class UsersController {
     private UsersServices usersServices;
 
     @PostMapping
-    public ResponseEntity<List<Users>> createUsers(@RequestBody List<UsersDTO> usersDTOs){
-        List<Users> createdUsers = new ArrayList<>();
-        for (UsersDTO usersDTO : usersDTOs) {
-            Users createdUser = usersServices.createUser(usersDTO);
-            createdUsers.add(createdUser);
-        }
-        return ResponseEntity.ok(createdUsers);
+    public Mono<ResponseEntity<List<Users>>> createUsers(@RequestBody List<UsersDTO> usersDTOs) {
+
+        return Flux.fromIterable(usersDTOs)
+                .flatMap(usersServices::createUser)
+                .collectList()
+                .map(ResponseEntity::ok);
     }
 
     @GetMapping("/{identification}")

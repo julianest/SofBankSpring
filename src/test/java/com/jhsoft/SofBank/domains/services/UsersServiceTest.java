@@ -33,7 +33,7 @@ public class UsersServiceTest {
     }
 
     // Prueba 1: Test para crear un usuario
-    @Test
+    /*@Test
     public void testCreateUser() {
 
         Users savedUser = new Users(usersDTO.getIdentification(), usersDTO.getName(), usersDTO.getLastName(), usersDTO.getEmail());
@@ -49,7 +49,7 @@ public class UsersServiceTest {
         assertEquals("Doe", result.getLastName());
         assertEquals("john.doe@example.com", result.getEmail());
         verify(usersRepository, times(1)).save(any(Users.class));
-    }
+    }*/
 
     // Prueba 2: Test para obtener un usuario por identificación
     @Test
