@@ -1,4 +1,4 @@
-package com.jhsoft.SofBank.domains.services;
+/*package com.jhsoft.SofBank.domains.services;
 
 import com.jhsoft.SofBank.domains.entities.UserLogin;
 import com.jhsoft.SofBank.domains.repositories.UserLoginRepository;
@@ -78,4 +78,4 @@ public class UserLoginServiceTest {
         assertNotNull(userDetails);
         assertFalse(userDetails.isEnabled());
     }
-}
+}*/

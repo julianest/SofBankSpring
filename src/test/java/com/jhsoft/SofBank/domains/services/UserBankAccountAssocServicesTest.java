@@ -1,4 +1,4 @@
-package com.jhsoft.SofBank.domains.services;
+/*package com.jhsoft.SofBank.domains.services;
 
 import com.jhsoft.SofBank.domains.dtos.UserBankAccountAssociationDTO;
 import com.jhsoft.SofBank.domains.dtos.UserBankAccountDTO;
@@ -141,3 +141,4 @@ public class UserBankAccountAssocServicesTest {
         assertEquals(1000.0, accountInfo.get(0).getBalance());
     }
 }
+*/

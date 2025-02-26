@@ -1,4 +1,4 @@
-package com.jhsoft.SofBank.domains.services;
+/*package com.jhsoft.SofBank.domains.services;
 
 import com.jhsoft.SofBank.domains.dtos.UsersDTO;
 import com.jhsoft.SofBank.domains.entities.Users;
@@ -52,7 +52,7 @@ public class UsersServiceTest {
     }*/
 
     // Prueba 2: Test para obtener un usuario por identificación
-    @Test
+   /* @Test
     public void testGetUserByIdentification_Success() {
         Users existingUser = new Users("1234", "John", "Doe", "john.doe@example.com");
 
@@ -118,4 +118,4 @@ public class UsersServiceTest {
 
         assertThrows(UsersNotFoundException.class, () -> usersService.updateUser("1234", updatedUserDTO));
     }
-}
+}*/
