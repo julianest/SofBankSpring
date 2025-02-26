@@ -13,7 +13,7 @@ FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
-COPY --from=build /app/build/libs/Sofbank-1.0.0.jar /app/sofbank.jar
+COPY --from=build /app/build/libs/sofbank-1.0.0.jar /app/sofbank.jar
 
 EXPOSE 8080
 
