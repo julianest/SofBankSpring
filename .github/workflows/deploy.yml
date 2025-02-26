@@ -1,4 +1,4 @@
-name: Api_EcuadorBank
+name: sofbank
 
 on:
   push:
